@@ -68,6 +68,8 @@ func main() {
 		}
 
 		status := "Unoccupied"
+		statusColor := color.RGBA{0, 255, 0, 0}
+
 		gocv.CvtColor(img, imgGrey, gocv.ColorBGRAToGray)
 		gocv.GaussianBlur(imgGrey, imgGrey, image.Pt(21, 21), 0, 0, gocv.BorderDefault)
 
@@ -94,12 +96,12 @@ func main() {
 			}
 
 			status = "Occupied"
+			statusColor = color.RGBA{255, 0, 0, 0}
 			rect := gocv.BoundingRect(c)
 			gocv.Rectangle(img, rect, color.RGBA{255, 0, 0, 0}, 2)
 		}
 
-		gocv.PutText(img, status, image.Pt(10, 20),
-			gocv.FontHersheyPlain, 1.2, color.RGBA{255, 0, 0, 0}, 2)
+		gocv.PutText(img, status, image.Pt(10, 20), gocv.FontHersheyPlain, 1.2, statusColor, 2)
 
 		window.IMShow(img)
 		gocv.WaitKey(1)
