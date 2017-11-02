@@ -80,14 +80,11 @@ func main() {
 		// calculate delta
 		gocv.AbsDiff(firstImg, imgGrey, imgDelta)
 
-		// use threshold
 		gocv.Threshold(imgDelta, imgThresh, 25, 255, gocv.ThresholdBinary)
 
-		// dilate
 		kernel := gocv.GetStructuringElement(gocv.MorphRect, image.Pt(3, 3))
 		gocv.Dilate(imgThresh, imgThresh, kernel)
 
-		// find contours
 		contours := gocv.FindContours(imgThresh, gocv.RetrievalExternal, gocv.ChainApproxSimple)
 		for _, c := range contours {
 			area := gocv.ContourArea(c)
