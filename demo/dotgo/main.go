@@ -15,8 +15,8 @@ import (
 const (
 	None = iota
 	Laplacian
-	Scharr
 	Threshold
+	Scharr
 )
 
 func main() {
@@ -59,7 +59,7 @@ func main() {
 	algorithmName := "None"
 
 	for {
-		if time.Since(start) > 35*time.Second {
+		if time.Since(start) > 38*time.Second {
 			os.Exit(0)
 		}
 
