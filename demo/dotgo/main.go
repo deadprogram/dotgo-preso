@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"image"
+	"image/color"
 	"os"
 	"os/exec"
 	"strconv"
@@ -54,6 +56,7 @@ func main() {
 	t := time.Now()
 	start := t
 	effect := 0
+	algorithmName := "None"
 
 	for {
 		if time.Since(start) > 35*time.Second {
@@ -69,6 +72,7 @@ func main() {
 			continue
 		}
 
+		// rotate through algorithms to use
 		if time.Since(t) > 2*time.Second {
 			t = time.Now()
 			effect++
@@ -80,16 +84,26 @@ func main() {
 
 		switch effect {
 		case None:
+			algorithmName = "None"
 			img.CopyTo(imgFinal)
 		case Laplacian:
+			algorithmName = "Laplacian"
 			gocv.Laplacian(img, imgFinal, gocv.MatTypeCV16S, 15, 1, 0, gocv.BorderDefault)
 		case Scharr:
+			algorithmName = "Scharr"
 			gocv.Scharr(img, imgFinal, gocv.MatTypeCV16S, 1, 0, 30, 0, gocv.BorderDefault)
 			gocv.Scharr(imgFinal, imgFinal, gocv.MatTypeCV16S, 0, 1, 30, 0, gocv.BorderDefault)
 		case Threshold:
+			algorithmName = "AbsDiff/Threshold"
 			gocv.AbsDiff(imgFirst, img, imgDelta)
 			gocv.Threshold(imgDelta, imgFinal, 25, 255, gocv.ThresholdBinary)
 		}
+
+		// show which algorithm in use
+		size := gocv.GetTextSize(algorithmName, gocv.FontHersheyPlain, 1.5, 2)
+		gocv.Rectangle(imgFinal, image.Rect(30, 30-size.Y-5, 30+size.X, 30+size.Y+5), color.RGBA{0, 0, 0, 0}, -1)
+		gocv.PutText(imgFinal, algorithmName, image.Pt(30, 30),
+			gocv.FontHersheyPlain, 1.5, color.RGBA{255, 255, 255, 0}, 2)
 
 		window.IMShow(imgFinal)
 		gocv.WaitKey(1)
