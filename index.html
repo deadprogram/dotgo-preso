@@ -40,7 +40,7 @@
       <div class="slides">
         <section>
           <section>
-            <h1>Computer Vision<br>Using Go and OpenCV 3</h1>
+            <h2>I am @deadprogram</h2>
           </section>
         </section>
 
@@ -78,24 +78,6 @@
           <h3>Intel Computer Vision SDK</h3>
         </section>
 
-        <section>          
-          <section>
-            <h2>Why you should use Go for<br>computer vision</h2>
-          </section>
-
-          <section>
-            <h2>Concurrency</h2>
-          </section>
-
-          <section>
-            <h2>Performance</h2>
-          </section>
-
-          <section>
-            <h2>Portability</h2>
-          </section>
-        </section>
-
         <section>            
           <section>
             <h2>What you can do with computer vision</h2>
@@ -119,6 +101,28 @@
 
           <section>
             <h2>Augmented Humans</h2>
+          </section>
+        </section>
+
+        <section>          
+          <section>
+            <h2>How GoCV Works</h2>
+          </section>
+
+          <section>
+            <h2>Go -> CGo -> C -> C++</h2>
+          </section>
+
+          <section>
+            <h2>Linux</h2>
+          </section>
+
+          <section>
+            <h2>OS X</h2>
+          </section>
+
+          <section>
+            <h2>Windows</h2>
           </section>
         </section>
 
@@ -182,7 +186,8 @@ func main() {
 	defer webcam.Close()
 
 	// open display window
-	window := gocv.NewWindow("Face Detect")
+  window := gocv.NewWindow("Face Detect")
+  window.SetWindowProperty(gocv.WindowPropertyFullscreen, gocv.WindowFullscreen)
 	defer window.Close()
 
 	// prepare image matrix
@@ -264,7 +269,10 @@ func main() {
         </section>
 
         <section>
-          <h2>gocv.io</h2>
+          <div class="image-container">
+            <img src="images/gocvlogo.jpg">
+          </div>
+          <h3>gocv.io</h3>          
         </section>
 
         <section>

@@ -20,6 +20,7 @@ func main() {
 
 	// open display window
 	window := gocv.NewWindow("Face Detect")
+	window.SetWindowProperty(gocv.WindowPropertyFullscreen, gocv.WindowFullscreen)
 	defer window.Close()
 
 	// prepare image matrix
